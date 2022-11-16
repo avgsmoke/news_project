@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+    <h3>{{ news.title }}</h3>
+    <p>{{ news.content|linebreaks }}</p>
+    <img src="{{ news.image.url }}" alt="{{ news.title }}"
+         class="card-img-top">
+    <hr>
+    {% if user.is_authenticated %}
+    <div class="comments_form my-2 p-2">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success my-2">Отправить</button>
+        </form>
+    </div>
+    {% else %}
+        <a href="{% url 'authapp:login' %}" class="btn btn-success btn-lg">Авторизоваться</a>
+    {% endif %}
+    <div class="comments my-3 p-2">
+        <h3>Комментарии</h3>
+        {% for item in comments %}
+            <div class="comments">
+                <h3>{{ item.user.username }}</h3>
+                <hr>
+                <p>{{ item.comment|linebreaksbr }}</p>
+                <p class="small end"> {{ item.created_at }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

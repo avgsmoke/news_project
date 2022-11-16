@@ -1,0 +1,35 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Избранное</h1>
+    <table class="table my-2 box">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название новости</th>
+            <th scope="col">Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in favorite %}
+            <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td>{{ item.news.title }}</td>
+                        <td>
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'mainapp:select_news' item.news.id %}" class="btn btn-primary">Посмотреть
+                            новость</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'mainapp:remove_favorite' item.id %}" class="btn btn-danger">Удалить из
+                            избранного</a>
+                    </div>
+                </div>
+            </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

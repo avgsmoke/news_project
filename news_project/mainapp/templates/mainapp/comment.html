@@ -1,0 +1,14 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+    <h3>Коментарии</h3>
+    {% for item in comment %}
+        <div class="my-3">
+            <h5>
+            <a href="{% url 'mainapp:update_comments' item.id %}">{{ item.comment }}</a>
+            </h5>
+            <a href="{% url 'mainapp:remove_comments' item.id %}" class="btn btn-danger mx-3">Удалить</a>
+        </div>
+    {% endfor %}
+
+{% endblock %}

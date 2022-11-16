@@ -1,0 +1,12 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+    <h3>Добавить комментарий</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-grid gap-2">
+            <button class="btn btn-success">Добавить</button>
+        </div>
+    </form>
+{% endblock %}
